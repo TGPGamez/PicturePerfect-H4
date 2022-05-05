@@ -1,6 +1,7 @@
 package com.tgpgamez.pictureperfect_h4;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +49,19 @@ public class ColorAdapter extends ArrayAdapter<ColorRGBCounter> {
         //Find the TextView that will be displaying position
         TextView tv_position = (TextView) convertView.findViewById(R.id.position_number);
         //Find the TextView that will be displaying color counter
-        TextView tv_counter = (TextView)convertView.findViewById(R.id.color_count) ;
+        TextView tv_counter = (TextView)convertView.findViewById(R.id.color_count);
+        //Find the TextView that will be displaying the hex color
+        TextView tv_hex = (TextView)convertView.findViewById(R.id.iv_textview_displayColor);
 
         //Set the background to RGB color
         imageView.setBackgroundColor(android.graphics.Color.rgb(colorRGBCounter.getColor().getRed(),
                                                                 colorRGBCounter.getColor().getGreen(),
                                                                 colorRGBCounter.getColor().getBlue()));
+
+        //Set the color and hex text
+        tv_hex.setTextColor(colorRGBCounter.getColor().manipulateColor(2.5f));
+        tv_hex.setText(colorRGBCounter.getColor().asHex());
+
         //Set the position
         tv_position.setText("" + (position + 1));
         tv_counter.setText("Count: " + colorRGBCounter.getCounter());

@@ -1,5 +1,7 @@
 package com.tgpgamez.pictureperfect_h4;
 
+import android.graphics.Color;
+
 /**
  * Class for ColorRGB
  *
@@ -9,6 +11,10 @@ package com.tgpgamez.pictureperfect_h4;
  * @version 1.0
  */
 public class ColorRGB {
+    private int alpha;
+    public int getAlpha() {
+        return alpha;
+    }
 
     private int red;
     public int getRed() {
@@ -25,7 +31,8 @@ public class ColorRGB {
         return blue;
     }
 
-    public ColorRGB(int red, int green, int blue) {
+    public ColorRGB(int alpha, int red, int green, int blue) {
+        this.alpha = alpha;
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -80,6 +87,18 @@ public class ColorRGB {
         int red = (rgb >> 16) & 0xff;
         int green = (rgb >> 8) & 0xff;
         int blue = (rgb) & 0xff;
-        return new ColorRGB(red, green, blue);
+        return new ColorRGB(alpha, red, green, blue);
+    }
+
+    /**
+     * Method is used to manipulate a color to be darker or lighter
+     * @param factor if 1.0f or higher, then it will be lighter, if lower then it will be darker
+     * @return Color as int
+     */
+    public int manipulateColor(float factor) {
+        return Color.argb(this.alpha,
+                Math.min(Math.round(this.red * factor), 255),
+                Math.min(Math.round(this.green * factor), 255),
+                Math.min(Math.round(this.blue * factor), 255));
     }
 }
