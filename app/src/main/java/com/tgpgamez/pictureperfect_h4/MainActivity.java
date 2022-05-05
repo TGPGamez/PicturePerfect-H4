@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(imageBitmap);
             colorProcessor.setBitmap(imageBitmap);
-            //runOnUiThread is needed to update the UI with a Thread/Runnable
+            //runOnUiThread is needed to update the UI with a Thread/Runnable because UI can only be updated on it's thread
             runOnUiThread(colorProcessor);
         }
     }
